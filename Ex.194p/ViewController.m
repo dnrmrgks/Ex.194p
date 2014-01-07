@@ -7,18 +7,55 @@
 //
 
 #import "ViewController.h"
+#import "ProductCell.h"
+#import "ProductCell.h"
 
-@interface ViewController ()
+@interface ViewController ()<UITableViewDataSource, UITableViewDelegate>{
+    
+    NSArray *data;
+}
 
 @end
 
 @implementation ViewController
 
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return [data count];
+}
+
+
+-(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+
+{
+    
+    ProductCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PRODUCT_CELL"];
+    
+    Product *item = data[indexPath.row];
+    [cell setProductInfo:item];
+    return cell;
+    
+}
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    
+    
+    data = @[[Product product:@"SoccerBall" price:@"100" image:@"ball1.png"],
+              [Product product:@"PocketBall" price:@"200" image:@"ball2.png" ],
+             [Product product:@"TennisBall" price:@"250" image:@"ball3.png"],
+             [Product product:@"GolfBall" price:@"300" image:@"Golf Ball.png"],
+             [Product product:@"BeachBall" price:@"999" image:@"car1.png"]];
+              }
+              
+    
+    
+    
 	// Do any additional setup after loading the view, typically from a nib.
-}
+
 
 - (void)didReceiveMemoryWarning
 {
